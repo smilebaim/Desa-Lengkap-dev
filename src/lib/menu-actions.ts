@@ -1,3 +1,4 @@
+
 'use server';
 import { db } from '@/firebase/config';
 import { 
@@ -314,14 +315,17 @@ export const seedDefaultMenus = async () => {
         const bottomNavRef = doc(menusCollection);
         batch.set(bottomNavRef, { name: 'Navigasi Bawah', description: 'Menu utama di bagian bawah layar.', location: 'bottomnav', createdAt: serverTimestamp() });
 
+        const bottomNavParentRefs: { [key: string]: DocumentReference } = {};
         for (const parent of bottomNavMenuStructure) {
             const parentItemRef = doc(collection(db, bottomNavRef.path, 'items'));
+            bottomNavParentRefs[parent.title] = parentItemRef;
             batch.set(parentItemRef, { title: parent.title, path: parent.path, icon: parent.icon, order: parent.order, parentId: null });
-            
-            if (parent.children.length > 0) {
+        }
+        for (const parent of bottomNavMenuStructure) {
+            if (parent.children && parent.children.length > 0) {
                 parent.children.forEach((child, index) => {
                     const childItemRef = doc(collection(db, bottomNavRef.path, 'items'));
-                    batch.set(childItemRef, { title: child.title, path: `/${child.slug}`, icon: 'FileText', order: index, parentId: parentItemRef.id });
+                    batch.set(childItemRef, { title: child.title, path: `/${child.slug}`, icon: 'FileText', order: index, parentId: bottomNavParentRefs[parent.title].id });
                 });
             }
         }
@@ -330,14 +334,19 @@ export const seedDefaultMenus = async () => {
         const topNavRef = doc(menusCollection);
         batch.set(topNavRef, { name: 'Menu Utama', description: 'Menu utama di dalam menu geser (sheet).', location: 'topnav', createdAt: serverTimestamp() });
         
+        const topNavParentRefs: { [key: string]: DocumentReference } = {};
         for (const parent of topNavMenuStructure) {
             const parentItemRef = doc(collection(db, topNavRef.path, 'items'));
+            topNavParentRefs[parent.title] = parentItemRef;
             batch.set(parentItemRef, { title: parent.title, path: parent.path, icon: parent.icon, order: parent.order, parentId: null });
-            
-            parent.children.forEach((child, index) => {
-                const childItemRef = doc(collection(db, topNavRef.path, 'items'));
-                batch.set(childItemRef, { title: child.title, path: `/${child.slug}`, icon: 'FileText', order: index, parentId: parentItemRef.id });
-            });
+        }
+        for (const parent of topNavMenuStructure) {
+            if (parent.children && parent.children.length > 0) {
+                parent.children.forEach((child, index) => {
+                    const childItemRef = doc(collection(db, topNavRef.path, 'items'));
+                    batch.set(childItemRef, { title: child.title, path: `/${child.slug}`, icon: 'FileText', order: index, parentId: topNavParentRefs[parent.title].id });
+                });
+            }
         }
         
         // --- SIDEBAR PROFIL ---
@@ -371,3 +380,4 @@ export const seedDefaultMenus = async () => {
         return { success: false, error: error.message };
     }
 };
+
