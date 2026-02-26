@@ -4,7 +4,7 @@ import { usePathname } from 'next/navigation';
 import TopNav from '@/components/TopNav';
 import BottomNav from '@/components/BottomNav';
 import { useEffect, useState } from 'react';
-import type { Menu, MenuItem } from '@/lib/menu-data';
+import type { Menu } from '@/lib/menu-data';
 import { getMenusWithItems } from '@/lib/menu-actions';
 import { getSiteSettings } from '@/lib/site-settings-actions';
 import type { SiteSettings } from '@/lib/site-settings-actions';
@@ -102,9 +102,13 @@ const PublicLayout = ({
       return false;
     }
     const pathnameRoot = pathname.split('/')[1];
+    if (!pathnameRoot) return false;
+    
+    // The sidebar is active if the root of the current path
+    // matches the root of any of the sidebar's menu item paths.
     return m.items.some(item => {
         const itemRoot = item.path.split('/')[1];
-        return itemRoot && pathnameRoot && itemRoot === pathnameRoot;
+        return itemRoot && itemRoot === pathnameRoot;
     });
   });
 
@@ -122,7 +126,7 @@ const PublicLayout = ({
     <div className="flex flex-col min-h-screen">
       <TopNav menu={topNavMenu} loading={loading} logoUrl={siteSettings?.logoUrl} />
       {needsSidebar && <Sidebar menu={activeSidebarMenu} />}
-      <main className={`flex-grow transition-all duration-300 ${needsSidebar ? 'md:pl-72 pl-12' : ''}`}>
+      <main className={`flex-grow transition-all duration-300 ${needsSidebar ? 'md:pl-72 pl-16' : ''}`}>
         {children}
       </main>
       <BottomNav menu={bottomNavMenu} loading={loading} />

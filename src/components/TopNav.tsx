@@ -11,7 +11,8 @@ import {
   Search, 
   Menu as MenuIcon,
   ChevronDown,
-  Loader
+  Loader,
+  Activity
 } from 'lucide-react';
 import {
   Sheet,
@@ -62,10 +63,10 @@ const TopNav: React.FC<TopNavProps> = ({ className, hasNewNews = false, menu, lo
   }
 
   const renderMenuItems = (items: MenuItem[]) => {
-      const parentItems = items.filter(item => !item.parentId);
+      const parentItems = items.filter(item => !item.parentId).sort((a, b) => a.order - b.order);
       
       return parentItems.map(parentItem => {
-          const subItems = getSubItems(parentItem.id);
+          const subItems = getSubItems(parentItem.id).sort((a, b) => a.order - b.order);
           const ParentIcon = getIcon(parentItem.icon);
 
           if (subItems.length === 0) {
@@ -178,9 +179,9 @@ const TopNav: React.FC<TopNavProps> = ({ className, hasNewNews = false, menu, lo
                         variant="ghost" 
                         className="flex-1 justify-start text-black hover:text-black hover:bg-black/10 transition-all text-xs sm:text-sm"
                       >
-                        <Link href="/berita" className="flex items-center" onClick={() => setIsMainMenuOpen(false)}>
+                        <Link href="/info" className="flex items-center" onClick={() => setIsMainMenuOpen(false)}>
                           <Bell className="h-5 w-5 sm:h-6 sm:w-6 mr-2" />
-                          <span>Notifikasi</span>
+                          <span>Info & Berita</span>
                           {hasNewNews && (
                             <span className="ml-2 h-1.5 w-1.5 sm:h-2 sm:w-2 bg-red-500 rounded-full" />
                           )}

@@ -67,7 +67,7 @@ const BottomNav: React.FC<BottomNavProps> = ({ className, menu, loading }) => {
                     </SheetHeader>
                     <ScrollArea className="h-full">
                       <div className="space-y-3 sm:space-y-4 py-6 sm:py-8">
-                        <h3 className="font-semibold text-base sm:text-lg mb-2 text-black px-2 sm:px-3 border-b border-black/10 pb-2 transition-all hover:bg-black/10 flex items-center gap-2">
+                        <h3 className="font-semibold text-base sm:text-lg mb-2 text-black px-2 sm:px-3 border-b border-black/10 pb-2 transition-all flex items-center gap-2">
                            <Icon className="h-5 w-5" />
                            {item.title}
                         </h3>

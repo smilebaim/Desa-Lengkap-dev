@@ -1,4 +1,3 @@
-
 'use server';
 import { db } from '@/firebase/config';
 import { 
@@ -255,16 +254,16 @@ export const seedDefaultMenus = async () => {
         ];
 
         const topNavMenuStructure = [
-            { title: 'Layanan Publik', path: '/layanan', icon: 'Briefcase', order: 0, children: [
-                ...initialPages.filter(p => p.slug.startsWith('layanan/')),
-                { title: "Pos Kesehatan Desa", slug: "layanan/poskesdes" },
-                { title: "Menu Pendamping Gizi", slug: "layanan/mpg" },
-                { title: "Bank Sampah", slug: "layanan/bank-sampah" },
-                { title: "Pos Keamanan Lingkungan", slug: "layanan/poskamling" },
+            { title: 'Profil', path: '/profil', icon: 'User', order: 0, children: [] },
+            { title: 'Layanan Publik', path: '/layanan', icon: 'Briefcase', order: 1, children: [] },
+            { title: 'Kelembagaan', path: '/kelembagaan', icon: 'Library', order: 2, children: initialPages.filter(p => p.slug.startsWith('kelembagaan/')) },
+            { title: 'Ekonomi', path: '/ekonomi', icon: 'TrendingUp', order: 3, children: [{title: 'BUMDes', slug: 'ekonomi/bumdes'}, {title: 'Koperasi', slug: 'ekonomi/koperasi'}, {title: 'UMKM', slug: 'ekonomi/umkm'}] },
+            { title: 'Aktivitas', path: '/aktivitas', icon: 'Activity', order: 4, children: [
+                {title: 'Agenda Kegiatan', slug: 'aktivitas/agenda'},
+                {title: 'Kalender Kegiatan', slug: 'aktivitas/kalender-kegiatan'},
+                {title: 'Kalender Pangan', slug: 'aktivitas/kalender-pangan'}
             ]},
-            { title: 'Kelembagaan', path: '/kelembagaan', icon: 'Library', order: 1, children: initialPages.filter(p => p.slug.startsWith('kelembagaan/')) },
-            { title: 'Ekonomi', path: '/ekonomi', icon: 'TrendingUp', order: 2, children: [{title: 'BUMDes', slug: 'ekonomi/bumdes'}, {title: 'Koperasi', slug: 'ekonomi/koperasi'}, {title: 'UMKM', slug: 'ekonomi/umkm'}] },
-            { title: 'Pustaka', path: '/pustaka', icon: 'BookOpen', order: 3, children: [{title: 'Publikasi', slug: 'pustaka/publikasi'}, {title: 'Pustaka Desa', slug: 'pustaka/pustaka-desa'}] },
+            { title: 'Pustaka', path: '/pustaka', icon: 'BookOpen', order: 5, children: [{title: 'Publikasi', slug: 'pustaka/publikasi'}, {title: 'Pustaka Desa', slug: 'pustaka/pustaka-desa'}] },
         ];
         
         const sidebarProfilMenu = {
@@ -281,6 +280,21 @@ export const seedDefaultMenus = async () => {
                 order: index,
                 parentId: null
               }))
+        };
+        
+        const sidebarLayananMenu = {
+            name: 'Layanan Publik',
+            description: 'Navigasi untuk semua layanan publik desa.',
+            location: 'sidebar',
+            icon: 'Briefcase',
+            items: [
+                { title: "Layanan Persuratan", path: "/layanan/persuratan", icon: "FileSignature", order: 0, parentId: null },
+                { title: "Pos Kesehatan Desa", path: "/layanan/poskesdes", icon: "HeartPulse", order: 1, parentId: null },
+                { title: "Menu Pendamping Gizi", path: "/layanan/mpg", icon: "Apple", order: 2, parentId: null },
+                { title: "Pos Keamanan Lingkungan", path: "/layanan/poskamling", icon: "Shield", order: 3, parentId: null },
+                { title: "Bank Sampah", path: "/layanan/bank-sampah", icon: "Trash2", order: 4, parentId: null },
+                { title: "Penanganan Keluhan", path: "/layanan/penanganan-keluhan", icon: "MessageSquareWarning", order: 5, parentId: null },
+            ]
         };
 
 
@@ -319,6 +333,14 @@ export const seedDefaultMenus = async () => {
         batch.set(sidebarProfilRef, { name: sidebarProfilMenu.name, description: sidebarProfilMenu.description, location: sidebarProfilMenu.location, icon: sidebarProfilMenu.icon, createdAt: serverTimestamp() });
         sidebarProfilMenu.items.forEach(item => {
             const itemRef = doc(collection(db, sidebarProfilRef.path, 'items'));
+            batch.set(itemRef, item);
+        });
+
+        // --- SIDEBAR LAYANAN ---
+        const sidebarLayananRef = doc(menusCollection);
+        batch.set(sidebarLayananRef, { name: sidebarLayananMenu.name, description: sidebarLayananMenu.description, location: sidebarLayananMenu.location, icon: sidebarLayananMenu.icon, createdAt: serverTimestamp() });
+        sidebarLayananMenu.items.forEach(item => {
+            const itemRef = doc(collection(db, sidebarLayananRef.path, 'items'));
             batch.set(itemRef, item);
         });
 
