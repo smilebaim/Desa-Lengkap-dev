@@ -1,3 +1,4 @@
+
 'use server';
 import { db } from '@/firebase/config';
 import { 
@@ -244,7 +245,6 @@ export const seedDefaultMenus = async () => {
     try {
         const bottomNavMenuStructure = [
             { title: 'Peta', path: '/tata-ruang', icon: 'Map', order: 0, children: [] },
-            { title: 'Profil Desa', path: '/profil', icon: 'Landmark', order: 1, children: initialPages.filter(p => p.slug.startsWith('profil/')) },
             { title: 'Pembangunan', path: '/pembangunan', icon: 'Construction', order: 2, children: [{title: 'RPJMDes', slug: 'pembangunan/rpjmdes'}, {title: 'RKPDes', slug: 'pembangunan/rkpdes'}] },
             { title: 'Dana Desa', path: '/dana-desa', icon: 'Wallet', order: 3, children: [{title: 'Pendapatan', slug: 'dana-desa/pendapatan'}, {title: 'Belanja', slug: 'dana-desa/belanja'}] },
             { title: 'Indeks', path: '/indeks', icon: 'BarChart3', order: 4, children: [
@@ -266,6 +266,23 @@ export const seedDefaultMenus = async () => {
             { title: 'Ekonomi', path: '/ekonomi', icon: 'TrendingUp', order: 2, children: [{title: 'BUMDes', slug: 'ekonomi/bumdes'}, {title: 'Koperasi', slug: 'ekonomi/koperasi'}, {title: 'UMKM', slug: 'ekonomi/umkm'}] },
             { title: 'Pustaka', path: '/pustaka', icon: 'BookOpen', order: 3, children: [{title: 'Publikasi', slug: 'pustaka/publikasi'}, {title: 'Pustaka Desa', slug: 'pustaka/pustaka-desa'}] },
         ];
+        
+        const sidebarProfilMenu = {
+            name: 'Profil Desa',
+            description: 'Menu khusus untuk halaman profil.',
+            location: 'sidebar',
+            icon: 'Landmark',
+            items: initialPages
+              .filter(p => p.slug.startsWith('profil/'))
+              .map((p, index) => ({
+                title: p.title,
+                path: `/${p.slug}`,
+                icon: 'ChevronRight',
+                order: index,
+                parentId: null
+              }))
+        };
+
 
         // --- BOTTOM NAV ---
         const bottomNavRef = doc(menusCollection);
@@ -297,6 +314,14 @@ export const seedDefaultMenus = async () => {
             });
         }
         
+        // --- SIDEBAR PROFIL ---
+        const sidebarProfilRef = doc(menusCollection);
+        batch.set(sidebarProfilRef, { name: sidebarProfilMenu.name, description: sidebarProfilMenu.description, location: sidebarProfilMenu.location, icon: sidebarProfilMenu.icon, createdAt: serverTimestamp() });
+        sidebarProfilMenu.items.forEach(item => {
+            const itemRef = doc(collection(db, sidebarProfilRef.path, 'items'));
+            batch.set(itemRef, item);
+        });
+
         await batch.commit();
         return { success: true, message: 'Menu default berhasil dibuat.' };
     } catch (error: any) {

@@ -4,16 +4,13 @@ import { useState, useEffect } from "react";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription, SheetHeader } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import * as Icons from "lucide-react";
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import type { Menu, MenuItem } from "@/lib/menu-data";
 
 interface BottomNavProps {
   className?: string;
   menu?: Menu;
-  allMenus?: Menu[];
   loading: boolean;
 }
 
@@ -23,9 +20,8 @@ const getIcon = (name?: string): React.FC<any> => {
     return IconComponent || (() => null);
 };
 
-const BottomNav: React.FC<BottomNavProps> = ({ className, menu, allMenus, loading }) => {
+const BottomNav: React.FC<BottomNavProps> = ({ className, menu, loading }) => {
   const [openSheet, setOpenSheet] = useState<string | null>(null);
-  const pathname = usePathname();
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -38,72 +34,10 @@ const BottomNav: React.FC<BottomNavProps> = ({ className, menu, allMenus, loadin
 
   const parentItems = menu?.items?.filter(item => !item.parentId).sort((a, b) => a.order - b.order) || [];
 
-  const Sidebar = ({ menuId }: { menuId: string }) => {
-    const targetMenu = allMenus?.find(m => m.id === menuId);
-    if (!targetMenu?.items || targetMenu.items.length === 0) return null;
-
-    const isRouteActive = targetMenu.items.some(item => {
-        const normalizedItemPath = (item.path || '').startsWith('/') ? (item.path || '').substring(1) : (item.path || '');
-        const normalizedPathname = (pathname || '').startsWith('/') ? (pathname || '').substring(1) : (pathname || '');
-        
-        const itemRoot = normalizedItemPath.split('/')[0] || '';
-        const pathnameRoot = normalizedPathname.split('/')[0] || '';
-
-        return itemRoot && pathnameRoot && itemRoot === pathnameRoot;
-    });
-
-    if (!isRouteActive) return null;
-
-    const MenuIcon = getIcon(targetMenu.icon);
-
-    return (
-      <div className="fixed left-0 md:top-16 top-1/2 -translate-y-1/2 md:translate-y-0 h-auto md:h-[calc(100vh-9rem)] md:w-72 w-12 bg-emerald-800/90 backdrop-blur-md backdrop-saturate-200 backdrop-brightness-125 border-r border-emerald-900 z-40 transition-all duration-300 rounded-r-[2rem] md:rounded-none md:rounded-br-[4rem]">
-        <ScrollArea className="h-full max-h-[70vh] md:max-h-none md:px-4 px-1 py-8">
-          <div className="space-y-2 md:pb-16">
-            <h3 className="font-semibold text-lg mb-6 text-emerald-50 border-b border-emerald-100/20 pb-3 hidden md:block flex items-center gap-2">
-                <MenuIcon className="h-5 w-5" />
-                {targetMenu.name}
-            </h3>
-            <div className="space-y-4">
-              <TooltipProvider delayDuration={100}>
-                {targetMenu.items.map((item, index) => {
-                   const ItemIcon = getIcon(item.icon);
-                   return (
-                      <Tooltip key={index}>
-                        <TooltipTrigger asChild>
-                          <Button
-                            variant="ghost"
-                            className={`w-full justify-center md:justify-start text-emerald-50 hover:text-emerald-50 hover:bg-emerald-700/50 transition-all py-3 md:py-2.5 px-1 md:px-3 text-sm ${
-                              pathname === item.path ? 'bg-emerald-700/70' : ''
-                            }`}
-                            asChild
-                          >
-                            <Link href={item.path}>
-                              <ItemIcon className="h-4 w-4 md:h-5 md:w-5 md:mr-3 text-white" />
-                              <span className="hidden md:inline">{item.title}</span>
-                            </Link>
-                          </Button>
-                        </TooltipTrigger>
-                        <TooltipContent side="right" sideOffset={16} className="md:hidden bg-emerald-800/90 text-emerald-50 border-emerald-700">
-                          <p>{item.title}</p>
-                        </TooltipContent>
-                      </Tooltip>
-                   )
-                })}
-              </TooltipProvider>
-            </div>
-          </div>
-        </ScrollArea>
-      </div>
-    );
-  };
-
   if (!isClient) return null;
 
   return (
     <>
-      {allMenus?.filter(m => m.location === 'sidebar').map(m => <Sidebar key={m.id} menuId={m.id} />)}
-
       <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] sm:w-[600px] max-w-full rounded-full bg-white/40 border-t border-black/10 backdrop-blur-md backdrop-saturate-200 backdrop-brightness-125 transition-all">
         <div className="flex justify-center items-center h-14 sm:h-16 rounded-full overflow-hidden">
           {loading ? (
