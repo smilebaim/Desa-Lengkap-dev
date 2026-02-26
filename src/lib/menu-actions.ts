@@ -256,7 +256,7 @@ export const seedDefaultMenus = async () => {
         const topNavMenuStructure = [
             { title: 'Profil', path: '/profil', icon: 'User', order: 0, children: [] },
             { title: 'Layanan Publik', path: '/layanan', icon: 'Briefcase', order: 1, children: [] },
-            { title: 'Kelembagaan', path: '/kelembagaan', icon: 'Library', order: 2, children: initialPages.filter(p => p.slug.startsWith('kelembagaan/')) },
+            { title: 'Kelembagaan', path: '/kelembagaan', icon: 'Library', order: 2, children: [] },
             { title: 'Ekonomi', path: '/ekonomi', icon: 'TrendingUp', order: 3, children: [{title: 'BUMDes', slug: 'ekonomi/bumdes'}, {title: 'Koperasi', slug: 'ekonomi/koperasi'}, {title: 'UMKM', slug: 'ekonomi/umkm'}] },
             { title: 'Aktivitas', path: '/aktivitas', icon: 'Activity', order: 4, children: [
                 {title: 'Agenda Kegiatan', slug: 'aktivitas/agenda'},
@@ -294,6 +294,18 @@ export const seedDefaultMenus = async () => {
                 { title: "Pos Keamanan Lingkungan", path: "/layanan/poskamling", icon: "Shield", order: 3, parentId: null },
                 { title: "Bank Sampah", path: "/layanan/bank-sampah", icon: "Trash2", order: 4, parentId: null },
                 { title: "Penanganan Keluhan", path: "/layanan/penanganan-keluhan", icon: "MessageSquareWarning", order: 5, parentId: null },
+            ]
+        };
+        
+        const sidebarKelembagaanMenu = {
+            name: 'Kelembagaan Desa',
+            description: 'Navigasi untuk lembaga desa.',
+            location: 'sidebar',
+            icon: 'Library',
+            items: [
+                { title: "PKK", path: "/kelembagaan/pkk", icon: "Users", order: 0, parentId: null },
+                { title: "LKD", path: "/kelembagaan/lkd", icon: "Library", order: 1, parentId: null },
+                { title: "Karang Taruna", path: "/kelembagaan/karang-taruna", icon: "Shield", order: 2, parentId: null },
             ]
         };
 
@@ -341,6 +353,14 @@ export const seedDefaultMenus = async () => {
         batch.set(sidebarLayananRef, { name: sidebarLayananMenu.name, description: sidebarLayananMenu.description, location: sidebarLayananMenu.location, icon: sidebarLayananMenu.icon, createdAt: serverTimestamp() });
         sidebarLayananMenu.items.forEach(item => {
             const itemRef = doc(collection(db, sidebarLayananRef.path, 'items'));
+            batch.set(itemRef, item);
+        });
+
+        // --- SIDEBAR KELEMBAGAAN ---
+        const sidebarKelembagaanRef = doc(menusCollection);
+        batch.set(sidebarKelembagaanRef, { name: sidebarKelembagaanMenu.name, description: sidebarKelembagaanMenu.description, location: sidebarKelembagaanMenu.location, icon: sidebarKelembagaanMenu.icon, createdAt: serverTimestamp() });
+        sidebarKelembagaanMenu.items.forEach(item => {
+            const itemRef = doc(collection(db, sidebarKelembagaanRef.path, 'items'));
             batch.set(itemRef, item);
         });
 
