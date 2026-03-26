@@ -1,4 +1,3 @@
-
 'use client';
 import { usePathname } from 'next/navigation';
 import TopNav from '@/components/TopNav';
@@ -125,7 +124,7 @@ const PublicLayout = ({
   return (
     <div className="flex flex-col min-h-screen">
       <TopNav menu={topNavMenu} loading={loading} logoUrl={siteSettings?.logoUrl} />
-      {needsSidebar && <Sidebar menu={activeSidebarMenu} />}
+      {needsSidebar && activeSidebarMenu && <Sidebar menu={activeSidebarMenu} />}
       <main className={`flex-grow transition-all duration-300 ${needsSidebar ? 'md:pl-72 pl-16' : ''}`}>
         {children}
       </main>
