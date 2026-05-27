@@ -219,11 +219,22 @@ const IdmForm = ({ initialData, onSave, isSubmitting }: { initialData: any, onSa
 const EditStatistikPage = () => {
     const router = useRouter();
     const params = useParams();
-    const statId = params.id as string;
     const { toast } = useToast();
+    
+    const [statId, setStatId] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(true);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [statData, setStatData] = useState<(StatistikData & {id: string}) | null>(null);
+
+    useEffect(() => {
+        const unwrapParams = async () => {
+            const resolvedParams = await params;
+            if (resolvedParams && resolvedParams.id) {
+                setStatId(resolvedParams.id as string);
+            }
+        };
+        unwrapParams();
+    }, [params]);
 
     useEffect(() => {
         if (!statId) return;
@@ -242,6 +253,7 @@ const EditStatistikPage = () => {
     }, [statId, router, toast]);
     
     const handleSave = async (jsonDataString: string) => {
+        if (!statId) return;
         setIsSubmitting(true);
         const result = await updateStatistik(statId, { data: jsonDataString });
 
@@ -271,7 +283,6 @@ const EditStatistikPage = () => {
                     return <JsonEditor initialData={statData.data} onSave={handleSave} isSubmitting={isSubmitting} />;
             }
         } catch (e) {
-            // If JSON is invalid, fall back to the text editor so the user can fix it.
             return <JsonEditor initialData={statData.data} onSave={handleSave} isSubmitting={isSubmitting} />;
         }
     };

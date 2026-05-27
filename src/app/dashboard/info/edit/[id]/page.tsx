@@ -19,14 +19,23 @@ const EditPostPage = () => {
     const params = useParams();
     const { toast } = useToast();
     
-    const postId = params.id as string;
-
+    const [postId, setPostId] = useState<string | null>(null);
     const [title, setTitle] = useState('');
     const [category, setCategory] = useState<'Berita' | 'Pengumuman'>('Berita');
     const [content, setContent] = useState('');
     const [status, setStatus] = useState<'Published' | 'Draft'>('Draft');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        const unwrapParams = async () => {
+            const resolvedParams = await params;
+            if (resolvedParams && resolvedParams.id) {
+                setPostId(resolvedParams.id as string);
+            }
+        };
+        unwrapParams();
+    }, [params]);
 
     useEffect(() => {
         if (!postId) return;
@@ -50,7 +59,7 @@ const EditPostPage = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (!user) {
+        if (!user || !postId) {
             toast({ title: "Anda harus login untuk mengedit post.", variant: "destructive" });
             return;
         }

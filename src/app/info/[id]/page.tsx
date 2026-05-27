@@ -1,22 +1,22 @@
-
 import PublicLayout from "@/layouts/PublicLayout";
 import { getPost, incrementPostView } from "@/lib/posts-actions";
 import { notFound } from 'next/navigation';
 import { Badge } from "@/components/ui/badge";
 
-export default async function PostDetailPage({ params }: { params: { id: string } }) {
-    if (!params.id) {
+export default async function PostDetailPage({ params }: { params: Promise<{ id: string }> }) {
+    const { id } = await params;
+    
+    if (!id) {
         notFound();
     }
     
-    const post = await getPost(params.id);
+    const post = await getPost(id);
     
     if (!post || post.status !== 'Published') {
         notFound();
     }
 
-    // Increment view count, fire and forget
-    incrementPostView(params.id);
+    incrementPostView(id);
 
     return (
         <PublicLayout>

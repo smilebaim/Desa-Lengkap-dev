@@ -1,4 +1,3 @@
-
 'use client';
 import { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'next/navigation';
@@ -9,7 +8,7 @@ import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import Breadcrumb from '@/components/Breadcrumb';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, Plus, Trash2, Edit, File as FileIcon, Upload, Loader2, AlignLeft, Paperclip } from 'lucide-react';
+import { ArrowLeft, Plus, Trash2, Edit, File as FileIcon, Upload, AlignLeft, Paperclip } from 'lucide-react';
 import Link from 'next/link';
 import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -87,35 +86,23 @@ const WorkspaceDetailPage = () => {
   const { user } = useUser();
   const storage = useStorage();
   const { toast } = useToast();
+  
+  const [workspaceId, setWorkspaceId] = useState<string | null>(null);
   const [workspace, setWorkspace] = useState<Workspace | null>(null);
   const [items, setItems] = useState<WorkspaceItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Form states
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  
-  // Item Dialog states
-  const [isItemDialogOpen, setIsItemDialogOpen] = useState(false);
-  const [dialogMode, setDialogMode] = useState<'add' | 'edit'>('add');
-  const [itemInDialog, setItemInDialog] = useState<WorkspaceItem | null>(null);
-
-
-  // Member management states
-  const [newMemberEmail, setNewMemberEmail] = useState('');
-  const [isInviting, setIsInviting] = useState(false);
-  const [memberToRemove, setMemberToRemove] = useState<UserProfile | null>(null);
-  
-  // Attachment states
-  const [uploadingFile, setUploadingFile] = useState<File | null>(null);
-  const [uploadProgress, setUploadProgress] = useState<number | null>(null);
-  const [attachmentToDelete, setAttachmentToDelete] = useState<Attachment | null>(null);
-
-  // Delete item state
-  const [itemToDelete, setItemToDelete] = useState<WorkspaceItem | null>(null);
-
-
-  const workspaceId = Array.isArray(params.workspaceId) ? params.workspaceId[0] : params.workspaceId;
+  useEffect(() => {
+    const unwrapParams = async () => {
+        const resolvedParams = await params;
+        if (resolvedParams && resolvedParams.workspaceId) {
+            const id = Array.isArray(resolvedParams.workspaceId) ? resolvedParams.workspaceId[0] : resolvedParams.workspaceId;
+            setWorkspaceId(id);
+        }
+    };
+    unwrapParams();
+  }, [params]);
 
   const fetchWorkspace = useCallback(async () => {
     if (!workspaceId || !user) return;
@@ -147,6 +134,19 @@ const WorkspaceDetailPage = () => {
     }
   }, [workspaceId]);
   
+  // Form states
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isItemDialogOpen, setIsItemDialogOpen] = useState(false);
+  const [dialogMode, setDialogMode] = useState<'add' | 'edit'>('add');
+  const [itemInDialog, setItemInDialog] = useState<WorkspaceItem | null>(null);
+  const [newMemberEmail, setNewMemberEmail] = useState('');
+  const [isInviting, setIsInviting] = useState(false);
+  const [memberToRemove, setMemberToRemove] = useState<UserProfile | null>(null);
+  const [uploadingFile, setUploadingFile] = useState<File | null>(null);
+  const [uploadProgress, setUploadProgress] = useState<number | null>(null);
+  const [attachmentToDelete, setAttachmentToDelete] = useState<Attachment | null>(null);
+  const [itemToDelete, setItemToDelete] = useState<WorkspaceItem | null>(null);
+
   useEffect(() => {
     if (isItemDialogOpen && itemInDialog && dialogMode === 'edit') {
       const currentItem = items.find(item => item.id === itemInDialog.id);
@@ -184,7 +184,7 @@ const WorkspaceDetailPage = () => {
   };
   
   const openEditDialog = (item: WorkspaceItem) => {
-    setItemInDialog(JSON.parse(JSON.stringify(item))); // Deep copy
+    setItemInDialog(JSON.parse(JSON.stringify(item)));
     setDialogMode('edit');
     setUploadingFile(null);
     setUploadProgress(null);
@@ -206,23 +206,21 @@ const WorkspaceDetailPage = () => {
 
         if (result.success && result.id) {
             toast({ title: 'Item berhasil ditambahkan.' });
-            // Wait a moment for the new item to appear in the stream, then transition to edit mode
             setTimeout(() => {
                 const newItemFromStream = items.find(i => i.id === result.id);
                 if (newItemFromStream) {
                     setItemInDialog(newItemFromStream);
                 } else {
-                    // Fallback if stream is slow
                     setItemInDialog(prev => prev ? {...prev, id: result.id!, attachments: []} : null);
                 }
                 setDialogMode('edit');
                 setIsSubmitting(false);
-            }, 500); // 500ms delay to allow Firestore stream to update
-            return; // Exit here to prevent setIsSubmitting(false) from running too early
+            }, 500);
+            return;
         } else {
             toast({ title: 'Gagal menambahkan item.', description: result.error, variant: 'destructive' });
         }
-    } else { // 'edit' mode
+    } else {
         const success = await updateItem(workspaceId, itemInDialog.id, {
             title: itemInDialog.title,
             description: itemInDialog.description,
@@ -230,7 +228,6 @@ const WorkspaceDetailPage = () => {
         });
         if (success) {
             toast({ title: 'Item berhasil diperbarui.' });
-            // Don't close dialog if user is editing
         } else {
             toast({ title: 'Gagal memperbarui item.', variant: 'destructive' });
         }
@@ -250,7 +247,7 @@ const WorkspaceDetailPage = () => {
     if (result.success) {
         toast({ title: 'Anggota berhasil diundang.' });
         setNewMemberEmail('');
-        await fetchWorkspace(); // Refresh data
+        await fetchWorkspace();
     } else {
         toast({ title: 'Gagal mengundang anggota.', description: result.error, variant: 'destructive' });
     }
@@ -262,7 +259,7 @@ const WorkspaceDetailPage = () => {
       const result = await removeMemberFromWorkspace(workspaceId, memberToRemove.id);
       if (result.success) {
           toast({ title: 'Anggota berhasil dihapus.' });
-          await fetchWorkspace(); // Refresh data
+          await fetchWorkspace();
       } else {
           toast({ title: 'Gagal menghapus anggota.', variant: 'destructive' });
       }
@@ -271,7 +268,7 @@ const WorkspaceDetailPage = () => {
 
   const handleFileUpload = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    if (!uploadingFile || !itemInDialog || !storage) {
+    if (!uploadingFile || !itemInDialog || !storage || !workspaceId) {
         toast({ title: 'File atau item tidak dipilih.', variant: 'destructive' });
         return;
     }
@@ -353,7 +350,7 @@ const confirmRemoveAttachment = async () => {
   }
   
   if (!workspace) {
-    return null; // Should be handled by error state
+    return null;
   }
 
   return (
@@ -587,7 +584,6 @@ const confirmRemoveAttachment = async () => {
 
                      {dialogMode === 'edit' && (
                         <>
-                            {/* Attachments Section */}
                             <div className="space-y-2">
                                 <Label>Lampiran</Label>
                                 {(itemInDialog.attachments?.length || 0) > 0 ? (
@@ -614,7 +610,6 @@ const confirmRemoveAttachment = async () => {
                                 )}
                             </div>
 
-                            {/* Upload Section */}
                             <div className="space-y-2">
                                 <Label htmlFor="file-upload">Unggah Lampiran Baru</Label>
                                 <div className="flex gap-2">

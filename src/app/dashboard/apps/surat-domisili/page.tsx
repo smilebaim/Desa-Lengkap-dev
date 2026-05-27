@@ -19,7 +19,7 @@ import {
   Trash2, 
   Printer,
   Save,
-  HomeIcon
+  Home
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -177,7 +177,7 @@ const SuratDomisiliPage = () => {
                  <Card>
                     <CardHeader>
                         <div className="flex items-center gap-4">
-                            <HomeIcon className="h-8 w-8 text-primary" />
+                            <Home className="h-8 w-8 text-primary" />
                             <div>
                                 <CardTitle>Aplikasi Surat Keterangan Domisili</CardTitle>
                                 <CardDescription>Modul untuk mengelola permintaan dan pembuatan surat keterangan domisili penduduk.</CardDescription>
