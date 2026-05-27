@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { ArrowRight, BookOpen, FileArchive } from 'lucide-react';
 
 const pustakaLinks = [
-    { title: "Publikasi Desa", href: "/pustaka/publikasi", description: "Dokumen, laporan, dan produk hukum resmi desa.", icon: FileArchive },
+    { title: "Publikasi Desa", href: "/publikasi", description: "Dokumen, laporan, dan produk hukum resmi desa.", icon: FileArchive },
     { title: "Pustaka Digital", href: "/pustaka/pustaka-desa", description: "Koleksi karya tulis yang berkaitan dengan desa.", icon: BookOpen },
 ];
 

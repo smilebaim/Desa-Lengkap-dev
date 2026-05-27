@@ -1,15 +1,14 @@
-
 import PublicLayout from "@/layouts/PublicLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 
 const profileLinks = [
-    { title: "Profil Desa", href: "/profil/profil-desa", description: "Gambaran umum, geografis, dan demografi desa." },
-    { title: "Sejarah Desa", href: "/profil/sejarah-desa", description: "Jejak langkah dan asal-usul berdirinya desa." },
-    { title: "Visi & Misi", href: "/profil/visi-misi", description: "Arah dan tujuan pembangunan desa ke depan." },
-    { title: "Struktur Pemerintahan", href: "/profil/struktur-pemerintahan", description: "Susunan perangkat desa yang bertugas." },
-    { title: "Struktur BPD", href: "/profil/struktur-badan", description: "Badan Permusyawaratan Desa sebagai mitra pemerintah." },
+    { title: "Profil Desa", href: "/profil-desa", description: "Gambaran umum, geografis, dan demografi desa." },
+    { title: "Sejarah Desa", href: "/sejarah-desa", description: "Jejak langkah dan asal-usul berdirinya desa." },
+    { title: "Visi & Misi", href: "/visi-misi", description: "Arah dan tujuan pembangunan desa ke depan." },
+    { title: "Struktur Pemerintahan", href: "/struktur-pemerintahan", description: "Susunan perangkat desa yang bertugas." },
+    { title: "Struktur BPD", href: "/struktur-badan", description: "Badan Permusyawaratan Desa sebagai mitra pemerintah." },
 ];
 
 export default function ProfilPage() {

@@ -4,12 +4,12 @@ import Link from 'next/link';
 import { ArrowRight, HeartPulse, Shield, Trash2, Apple, FileSignature, MessageSquareWarning } from 'lucide-react';
 
 const layananLinks = [
-    { title: "Layanan Persuratan", href: "/layanan/persuratan", description: "Pengurusan berbagai surat keterangan untuk warga.", icon: FileSignature },
-    { title: "Pos Kesehatan Desa (Poskesdes)", href: "/layanan/poskesdes", description: "Layanan kesehatan primer untuk masyarakat desa.", icon: HeartPulse },
-    { title: "Menu Pendamping Gizi (MPG)", href: "/layanan/mpg", description: "Contoh menu sehat untuk balita dan ibu hamil/menyusui.", icon: Apple },
-    { title: "Pos Keamanan Lingkungan (Poskamling)", href: "/layanan/poskamling", description: "Sistem keamanan swadaya untuk menjaga ketertiban.", icon: Shield },
-    { title: "Bank Sampah", href: "/layanan/bank-sampah", description: "Pengelolaan sampah kering kolektif dengan insentif.", icon: Trash2 },
-    { title: "Penanganan Keluhan", href: "/layanan/penanganan-keluhan", description: "Sampaikan aspirasi dan keluhan Anda terkait pelayanan.", icon: MessageSquareWarning },
+    { title: "Layanan Persuratan", href: "/persuratan", description: "Pengurusan berbagai surat keterangan untuk warga.", icon: FileSignature },
+    { title: "Pos Kesehatan Desa (Poskesdes)", href: "/poskesdes", description: "Layanan kesehatan primer untuk masyarakat desa.", icon: HeartPulse },
+    { title: "Menu Pendamping Gizi (MPG)", href: "/mpg", description: "Contoh menu sehat untuk balita dan ibu hamil/menyusui.", icon: Apple },
+    { title: "Pos Keamanan Lingkungan (Poskamling)", href: "/poskamling", description: "Sistem keamanan swadaya untuk menjaga ketertiban.", icon: Shield },
+    { title: "Bank Sampah", href: "/bank-sampah", description: "Pengelolaan sampah kering kolektif dengan insentif.", icon: Trash2 },
+    { title: "Penanganan Keluhan", href: "/penanganan-keluhan", description: "Sampaikan aspirasi dan keluhan Anda terkait pelayanan.", icon: MessageSquareWarning },
 ];
 
 export default function LayananPage() {

@@ -250,16 +250,16 @@ export const seedDefaultMenus = async () => {
         ];
 
         const topNavMenuStructure = [
-            { title: 'Profil', path: '/profil', icon: 'User', order: 0, children: initialPages.filter(p => p.slug.startsWith('profil/')).map(p => ({ title: p.title, slug: p.slug })) },
-            { title: 'Layanan Publik', path: '/layanan', icon: 'Briefcase', order: 1, children: initialPages.filter(p => p.slug.startsWith('layanan/')).map(p => ({ title: p.title, slug: p.slug })) },
-            { title: 'Kelembagaan', path: '/kelembagaan', icon: 'Library', order: 2, children: initialPages.filter(p => p.slug.startsWith('kelembagaan/')).map(p => ({ title: p.title, slug: p.slug })) },
-            { title: 'Ekonomi', path: '/ekonomi', icon: 'TrendingUp', order: 3, children: initialPages.filter(p => p.slug.startsWith('ekonomi/')).map(p => ({ title: p.title, slug: p.slug })) },
+            { title: 'Profil', path: '/profil', icon: 'User', order: 0 },
+            { title: 'Layanan Publik', path: '/layanan', icon: 'Briefcase', order: 1 },
+            { title: 'Kelembagaan', path: '/kelembagaan', icon: 'Library', order: 2 },
+            { title: 'Ekonomi', path: '/ekonomi', icon: 'TrendingUp', order: 3 },
             { title: 'Aktivitas', path: '/aktivitas', icon: 'Activity', order: 4, children: [
                 {title: 'Agenda Kegiatan', slug: 'aktivitas/agenda'},
                 {title: 'Kalender Kegiatan', slug: 'aktivitas/kalender-kegiatan'},
                 {title: 'Kalender Pangan', slug: 'aktivitas/kalender-pangan'}
             ]},
-            { title: 'Pustaka', path: '/pustaka', icon: 'BookOpen', order: 5, children: initialPages.filter(p => p.slug.startsWith('pustaka/')).map(p => ({ title: p.title, slug: p.slug })) },
+            { title: 'Pustaka', path: '/pustaka', icon: 'BookOpen', order: 5 },
         ];
         
         const sidebarMenus = [
@@ -268,21 +268,21 @@ export const seedDefaultMenus = async () => {
             description: 'Menu khusus untuk halaman profil.',
             location: 'sidebar',
             icon: 'Landmark',
-            items: initialPages.filter(p => p.slug.startsWith('profil/')).map((p, index) => ({ title: p.title, path: `/${p.slug}`, icon: 'ChevronRight', order: index, parentId: null }))
+            items: initialPages.filter(p => ['profil-desa', 'sejarah-desa', 'visi-misi', 'struktur-pemerintahan', 'struktur-badan'].includes(p.slug)).map((p, index) => ({ title: p.title, path: `/${p.slug}`, icon: 'ChevronRight', order: index, parentId: null }))
           },
           {
             name: 'Layanan Publik',
             description: 'Navigasi untuk semua layanan publik desa.',
             location: 'sidebar',
             icon: 'Briefcase',
-            items: initialPages.filter(p => p.slug.startsWith('layanan/')).map((p, index) => ({ title: p.title, path: `/${p.slug}`, icon: 'ChevronRight', order: index, parentId: null }))
+            items: initialPages.filter(p => ['persuratan'].includes(p.slug)).map((p, index) => ({ title: p.title, path: `/${p.slug}`, icon: 'ChevronRight', order: index, parentId: null }))
           },
           {
             name: 'Kelembagaan Desa',
             description: 'Navigasi untuk lembaga desa.',
             location: 'sidebar',
             icon: 'Library',
-            items: initialPages.filter(p => p.slug.startsWith('kelembagaan/')).map((p, index) => ({ title: p.title, path: `/${p.slug}`, icon: 'ChevronRight', order: index, parentId: null }))
+            items: initialPages.filter(p => ['pkk'].includes(p.slug)).map((p, index) => ({ title: p.title, path: `/${p.slug}`, icon: 'ChevronRight', order: index, parentId: null }))
           }
         ];
         
@@ -294,22 +294,26 @@ export const seedDefaultMenus = async () => {
             batch.set(parentItemRef, { title: parent.title, path: parent.path, icon: parent.icon, order: parent.order, parentId: null });
         }
         
-        // --- TOP NAV (for sub-menus) ---
+        // --- TOP NAV ---
         const topNavRef = doc(menusCollection);
-        batch.set(topNavRef, { name: 'Menu Utama', description: 'Menu utama di dalam menu geser (sheet).', location: 'topnav', createdAt: serverTimestamp() });
+        batch.set(topNavRef, { name: 'Menu Utama', description: 'Menu navigasi utama.', location: 'topnav', createdAt: serverTimestamp() });
         
-        const topNavParentRefs: { [key: string]: string } = {};
         for (const parent of topNavMenuStructure) {
             const parentItemRef = doc(collection(db, topNavRef.path, 'items'));
-            topNavParentRefs[parent.title] = parentItemRef.id;
             batch.set(parentItemRef, { title: parent.title, path: parent.path, icon: parent.icon, order: parent.order, parentId: null });
-        }
-        for (const parent of topNavMenuStructure) {
-            if (parent.children && parent.children.length > 0) {
-                parent.children.forEach((child, index) => {
+            
+            if (parent.children) {
+                for (let i = 0; i < parent.children.length; i++) {
+                    const child = parent.children[i];
                     const childItemRef = doc(collection(db, topNavRef.path, 'items'));
-                    batch.set(childItemRef, { title: child.title, path: `/${child.slug}`, icon: 'FileText', order: index, parentId: topNavParentRefs[parent.title] });
-                });
+                    batch.set(childItemRef, { 
+                        title: child.title, 
+                        path: `/${child.slug}`, 
+                        icon: 'ChevronRight', 
+                        order: i, 
+                        parentId: parentItemRef.id 
+                    });
+                }
             }
         }
         

@@ -4,8 +4,8 @@ import Link from 'next/link';
 import { ArrowRight, Construction, FileText } from 'lucide-react';
 
 const pembangunanLinks = [
-    { title: "RPJMDes", href: "/pembangunan/rpjmdes", description: "Rencana Pembangunan Jangka Menengah Desa (6 tahun).", icon: FileText },
-    { title: "RKPDes", href: "/pembangunan/rkpdes", description: "Rencana Kerja Pemerintah Desa tahunan.", icon: Construction },
+    { title: "RPJMDes", href: "/rpjmdes", description: "Rencana Pembangunan Jangka Menengah Desa (6 tahun).", icon: FileText },
+    { title: "RKPDes", href: "/rkpdes", description: "Rencana Kerja Pemerintah Desa tahunan.", icon: Construction },
 ];
 
 export default function PembangunanPage() {

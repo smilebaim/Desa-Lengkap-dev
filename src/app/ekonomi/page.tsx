@@ -4,9 +4,9 @@ import Link from 'next/link';
 import { ArrowRight, Building, Users, ShoppingCart } from 'lucide-react';
 
 const ekonomiLinks = [
-    { title: "BUMDes", href: "/ekonomi/bumdes", description: "Informasi dan unit usaha Badan Usaha Milik Desa.", icon: Building },
-    { title: "Koperasi", href: "/ekonomi/koperasi", description: "Layanan dan kinerja Koperasi Desa.", icon: Users },
-    { title: "UMKM", href: "/ekonomi/umkm", description: "Potensi dan produk Usaha Mikro, Kecil, dan Menengah.", icon: ShoppingCart },
+    { title: "BUMDes", href: "/bumdes", description: "Informasi dan unit usaha Badan Usaha Milik Desa.", icon: Building },
+    { title: "Koperasi", href: "/koperasi", description: "Layanan dan kinerja Koperasi Desa.", icon: Users },
+    { title: "UMKM", href: "/umkm", description: "Potensi dan produk Usaha Mikro, Kecil, dan Menengah.", icon: ShoppingCart },
 ];
 
 export default function EkonomiPage() {

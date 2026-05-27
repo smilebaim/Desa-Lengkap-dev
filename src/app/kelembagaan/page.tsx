@@ -4,9 +4,9 @@ import Link from 'next/link';
 import { ArrowRight, Library, Users, Shield } from 'lucide-react';
 
 const kelembagaanLinks = [
-    { title: "PKK", href: "/kelembagaan/pkk", description: "Pemberdayaan dan Kesejahteraan Keluarga.", icon: Users },
-    { title: "LKD", href: "/kelembagaan/lkd", description: "Lembaga Kemasyarakatan Desa.", icon: Library },
-    { title: "Karang Taruna", href: "/kelembagaan/karang-taruna", description: "Organisasi kepemudaan desa.", icon: Shield },
+    { title: "PKK", href: "/pkk", description: "Pemberdayaan dan Kesejahteraan Keluarga.", icon: Users },
+    { title: "LKD", href: "/lkd", description: "Lembaga Kemasyarakatan Desa.", icon: Library },
+    { title: "Karang Taruna", href: "/karang-taruna", description: "Organisasi kepemudaan desa.", icon: Shield },
 ];
 
 export default function KelembagaanPage() {

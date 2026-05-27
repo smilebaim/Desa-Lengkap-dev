@@ -7,7 +7,7 @@ export interface InitialPage {
 export const initialPages: InitialPage[] = [
   {
     title: "Profil Desa",
-    slug: "profil/profil-desa",
+    slug: "profil-desa",
     content: `<h1>Profil Umum Desa Remau Bako Tuo</h1>
 <p>Desa Remau Bako Tuo adalah sebuah desa yang terletak di Kecamatan Sadu, Kabupaten Tanjung Jabung Timur, Provinsi Jambi. Desa ini memiliki luas wilayah sekitar 150 km² dengan topografi yang didominasi oleh dataran rendah dan kawasan pesisir yang kaya akan sumber daya alam hayati.</p>
 <h2>Geografis dan Wilayah</h2>
@@ -30,7 +30,7 @@ export const initialPages: InitialPage[] = [
   },
   {
     title: "Sejarah Desa",
-    slug: "profil/sejarah-desa",
+    slug: "sejarah-desa",
     content: `<h1>Sejarah Singkat Desa Remau Bako Tuo</h1>
 <p>Nama 'Remau Bako Tuo' bukan sekadar deretan kata, melainkan sebuah identitas yang mencerminkan sejarah dan kearifan lokal masyarakat pesisir Sadu. Dalam bahasa lokal, 'Remau' berarti Harimau, sedangkan 'Bako Tuo' merujuk pada pohon Bakau (Mangrove) yang sudah sangat tua.</p>
 <p>Legenda menceritakan bahwa di masa lampau, hutan bakau di pesisir ini dijaga oleh sosok harimau gaib yang bijaksana. Sosok ini memastikan ekosistem bakau tetap lestari untuk melindungi masyarakat dari hantaman ombak besar laut timur Sumatera.</p>
@@ -45,7 +45,7 @@ export const initialPages: InitialPage[] = [
   },
   {
     title: "Visi dan Misi",
-    slug: "profil/visi-misi",
+    slug: "visi-misi",
     content: `<h1>Visi & Misi Desa Remau Bako Tuo</h1>
 <p>Untuk mencapai masa depan yang lebih baik, Pemerintah Desa Remau Bako Tuo telah menetapkan arah pembangunan strategis yang dituangkan dalam rumusan Visi dan Misi berikut ini.</p>
 <div style="background-color: #f0fdf4; padding: 2rem; border-radius: 1rem; border-left: 8px solid #16a34a; margin: 2rem 0;">
@@ -65,7 +65,7 @@ export const initialPages: InitialPage[] = [
   },
   {
     title: "Struktur Pemerintahan",
-    slug: "profil/struktur-pemerintahan",
+    slug: "struktur-pemerintahan",
     content: `<h1>Struktur Pemerintahan Desa</h1>
 <p>Pemerintahan Desa Remau Bako Tuo dijalankan oleh para perangkat desa yang memiliki integritas dan semangat pelayanan yang tinggi.</p>
 <div style="text-align: center; margin: 3rem 0; padding: 2rem; background-color: #ffffff; border: 1px solid #e5e7eb; border-radius: 1rem; shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);">
@@ -96,7 +96,7 @@ export const initialPages: InitialPage[] = [
   },
   {
     title: "Badan Permusyawaratan Desa",
-    slug: "profil/struktur-badan",
+    slug: "struktur-badan",
     content: `<h1>Badan Permusyawaratan Desa (BPD)</h1>
 <p>BPD memiliki peran sentral sebagai perwakilan masyarakat dalam menampung aspirasi dan melakukan pengawasan terhadap kinerja Pemerintah Desa.</p>
 <h2>Tugas Pokok & Fungsi BPD</h2>
@@ -115,7 +115,7 @@ export const initialPages: InitialPage[] = [
   },
   {
     title: "Layanan Persuratan",
-    slug: "layanan/persuratan",
+    slug: "persuratan",
     content: `<h1>Layanan Administrasi Persuratan</h1>
 <p>Pemerintah Desa Remau Bako Tuo berkomitmen untuk memberikan pelayanan administrasi yang cepat, tepat, dan tanpa pungutan liar. Warga kini dapat mengajukan berbagai jenis surat melalui kantor desa dengan proses yang lebih efisien.</p>
 <h2>Daftar Layanan Surat</h2>
@@ -144,7 +144,7 @@ export const initialPages: InitialPage[] = [
   },
   {
     title: "PKK",
-    slug: "kelembagaan/pkk",
+    slug: "pkk",
     content: `<h1>Pemberdayaan Kesejahteraan Keluarga (PKK)</h1>
 <p>Tim Penggerak PKK Desa Remau Bako Tuo adalah ujung tombak dalam meningkatkan kualitas kehidupan keluarga dan pemberdayaan perempuan di desa.</p>
 <h2>10 Program Pokok PKK</h2>
@@ -169,7 +169,7 @@ export const initialPages: InitialPage[] = [
   },
   {
     title: "BUMDes Remaubakotuo",
-    slug: "ekonomi/bumdes",
+    slug: "bumdes",
     content: `<h1>Badan Usaha Milik Desa (BUMDes)</h1>
 <p>BUMDes Remaubakotuo didirikan untuk mengoptimalkan aset desa dan mengelola unit usaha yang dapat memberikan kontribusi pada Pendapatan Asli Desa (PADes).</p>
 <h2>Unit Usaha Aktif</h2>
@@ -182,39 +182,16 @@ export const initialPages: InitialPage[] = [
 <p>Melalui BUMDes, kami berupaya agar ekonomi desa tidak hanya dikuasai oleh segelintir pihak, tetapi dapat dirasakan manfaatnya oleh seluruh lapisan masyarakat melalui bagi hasil keuntungan yang kembali digunakan untuk pembangunan desa.</p>`
   },
   {
-    title: "Indeks Ketahanan Sosial",
-    slug: "indeks/ketahanan-sosial",
-    content: `<h1>Indeks Ketahanan Sosial (IKS) Desa</h1>
-<p>Indeks ini mencerminkan sejauh mana masyarakat desa memiliki akses terhadap layanan kesehatan, pendidikan, modal sosial, dan pemukiman yang layak.</p>
-<p>Berikut adalah data IKS terbaru Desa Remau Bako Tuo:</p>
-[INDEKS_KETAHANAN_SOSIAL]
-<h2>Analisis Capaian</h2>
-<p>Skor IKS kita saat ini berada pada kategori <strong>Maju</strong>. Hal ini didukung oleh tingginya tingkat modal sosial (gotong royong) dan akses pendidikan dasar yang sudah merata di seluruh dusun.</p>`
-  },
-  {
-    title: "Indeks Ketahanan Ekonomi",
-    slug: "indeks/ketahanan-ekonomi",
-    content: `<h1>Indeks Ketahanan Ekonomi (IKE) Desa</h1>
-<p>IKE mengukur keragaman ekonomi, akses permodalan, infrastruktur penunjang ekonomi, serta stabilitas harga komoditas unggulan desa.</p>
-<p>Berikut adalah visualisasi IKE desa:</p>
-[INDEKS_KETAHANAN_EKONOMI]
-<h2>Fokus Perbaikan</h2>
-<p>Pemerintah desa terus berupaya meningkatkan akses permodalan bagi UMKM melalui BUMDes guna meningkatkan skor pada komponen 'Akses Lembaga Keuangan'.</p>`
-  },
-  {
-    title: "Pendapatan Desa",
-    slug: "dana-desa/pendapatan",
-    content: `<h1>Transparansi Pendapatan Desa</h1>
-<p>Setiap rupiah yang masuk ke kas desa dicatat secara transparan sebagai bentuk akuntabilitas publik. Pendapatan desa bersumber dari Dana Desa (APBN), ADD (APBD), Bagi Hasil Pajak, serta Pendapatan Asli Desa.</p>
-[DIAGRAM_PENDAPATAN_DESA]
-<p>Warga dapat memantau realisasi pendapatan ini melalui papan informasi digital yang kami sediakan.</p>`
-  },
-  {
-    title: "Belanja Desa",
-    slug: "dana-desa/belanja",
-    content: `<h1>Transparansi Alokasi Belanja Desa</h1>
-<p>Alokasi belanja desa difokuskan pada lima bidang utama pembangunan guna memastikan pertumbuhan desa yang inklusif.</p>
-[DIAGRAM_BELANJA_DESA]
-<p>Prioritas utama belanja tahun ini dialokasikan untuk pembangunan infrastruktur jalan usaha tani dan pemberdayaan masyarakat melalui pelatihan keterampilan kerja.</p>`
+    title: "Publikasi Desa",
+    slug: "publikasi",
+    content: `<h1>Publikasi dan Dokumen Resmi Desa</h1>
+<p>Halaman ini menyajikan berbagai dokumen publik, peraturan desa, dan laporan kinerja sebagai bentuk transparansi kami kepada seluruh masyarakat.</p>
+<h2>Daftar Publikasi Terbaru</h2>
+<ul>
+    <li>Laporan Penyelenggaraan Pemerintahan Desa (LPPD) Tahun 2023</li>
+    <li>Peraturan Desa tentang Pelestarian Hutan Mangrove</li>
+    <li>Rencana Kerja Pemerintah Desa (RKPDes) Tahun Anggaran 2024</li>
+</ul>
+<p>Anda dapat mengunduh salinan digital dokumen-dokumen tersebut di kantor desa atau menghubungi sekretariat desa untuk informasi lebih lanjut.</p>`
   }
 ];
