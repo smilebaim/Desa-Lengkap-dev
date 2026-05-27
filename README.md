@@ -4,7 +4,7 @@ Aplikasi Sistem Informasi Desa (SID) modern yang dibangun dengan **Next.js 15 (A
 
 ![Pratinjau Aplikasi](https://placehold.co/800x400/png?text=SID+Desa+Remau+Bako+Tuo)
 
-## 🌟 Fitur Utama yang Telah Diimplementasikan
+## 🌟 Fitur Unggulan
 
 ### 1. Administrasi & Layanan Publik (Aplikasi Desa)
 Modul lengkap untuk manajemen persuratan digital yang terintegrasi dengan database penduduk:
@@ -16,9 +16,9 @@ Modul lengkap untuk manajemen persuratan digital yang terintegrasi dengan databa
 - **Surat Pindah & Pengantar Umum**: Manajemen mutasi penduduk dan keperluan umum lainnya.
 
 ### 2. Manajemen Konten & Navigasi Cerdas
-- **Sidebar Otomatis**: Sistem navigasi publik yang cerdas; sidebar akan muncul otomatis di seksi Profil, Layanan, dan Kelembagaan berdasarkan deteksi URL.
-- **Editor Halaman Statis**: Kelola konten seperti Sejarah Desa, Visi & Misi secara dinamis melalui dasbor.
-- **Visualisasi Data (Placeholder)**: Sisipkan diagram (Piramida Penduduk, Anggaran, IDM) ke dalam halaman hanya dengan menempelkan teks placeholder seperti `[STATISTIK_PENDUDUK_CHART]`.
+- **Sidebar Kontekstual Otomatis**: Navigasi yang cerdas; sidebar akan muncul secara otomatis di seksi Profil, Layanan, dan Kelembagaan berdasarkan deteksi URL halaman yang sedang dibuka.
+- **Editor Halaman Dinamis**: Kelola konten seperti Sejarah Desa, Visi & Misi secara dinamis melalui dashboard admin tanpa menyentuh kode.
+- **Visualisasi Data Placeholder**: Sisipkan diagram (Piramida Penduduk, Anggaran, IDM) ke dalam halaman hanya dengan menempelkan teks placeholder seperti `[STATISTIK_PENDUDUK_CHART]`.
 
 ### 3. Database Kependudukan
 - Manajemen data penduduk (CRUD) dengan fitur **Import Massal dari CSV**.
@@ -30,7 +30,7 @@ Modul lengkap untuk manajemen persuratan digital yang terintegrasi dengan databa
 
 ### 5. Transparansi & Statistik
 - **Dashboard Analitik**: Pantau jumlah penduduk, artikel berita, dan permintaan surat yang sedang diproses.
-- **Statistik IDM**: Visualisasi Indeks Desa Membangun (Sosial, Ekonomi, Lingkungan) dengan grafik gauge dan bar.
+- **Statistik IDM**: Visualisasi Indeks Desa Membangun (Sosial, Ekonomi, Lingkungan) dengan grafik gauge dan bar yang informatif.
 - **Transparansi Anggaran**: Grafik sebaran pendapatan dan belanja desa (APBDes).
 
 ## 🚀 Teknologi Utama
@@ -45,21 +45,23 @@ Modul lengkap untuk manajemen persuratan digital yang terintegrasi dengan databa
 
 ## 🛠️ Cara Memulai
 
-1. **Konfigurasi Firebase**:
-   Pastikan file `src/firebase/config.ts` sudah berisi konfigurasi Firebase Project Anda.
-2. **Instalasi**:
-   ```bash
-   npm install
-   ```
-3. **Menjalankan Server**:
-   ```bash
-   npm run dev
-   ```
-4. **Inisialisasi Data**:
-   Masuk ke Dashboard, gunakan tombol **"Buat Menu Default"** di menu Kelola Menu dan **"Pulihkan Data Bawaan"** di menu Statistik untuk menyiapkan struktur awal.
-
-## 📁 Repositori
-Repositori ini tersedia di: [https://github.com/smilebaim/Desa-Lengkap](https://github.com/smilebaim/Desa-Lengkap)
+1.  **Klon Repositori**:
+    ```bash
+    git clone https://github.com/smilebaim/Desa-Lengkap.git
+    cd Desa-Lengkap
+    ```
+2.  **Instalasi Dependensi**:
+    ```bash
+    npm install
+    ```
+3.  **Konfigurasi Firebase**:
+    Pastikan file `src/firebase/config.ts` sudah berisi konfigurasi Firebase Project Anda.
+4.  **Menjalankan Server**:
+    ```bash
+    npm run dev
+    ```
+5.  **Inisialisasi Data**:
+    Masuk ke Dashboard Admin, gunakan tombol **"Buat Menu Default"** di menu Kelola Menu dan **"Pulihkan Data Bawaan"** di menu Statistik untuk menyiapkan struktur awal.
 
 ---
 *Dikembangkan dengan ❤️ untuk kemajuan digital Desa Remau Bako Tuo.*
