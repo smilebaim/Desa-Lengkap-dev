@@ -15,7 +15,7 @@ Aplikasi Sistem Informasi Desa modern yang dirancang untuk mempercepat pelayanan
 - **Transparansi Anggaran**: Grafik sebaran pendapatan dan belanja desa (APBDes) yang mudah dipahami.
 
 ### 3. Konten & Navigasi Cerdas
-- **Sidebar Kontekstual**: Navigasi yang muncul otomatis berdasarkan halaman yang sedang dibuka.
+- **Sidebar Kontekstual Otomatis**: Navigasi yang muncul otomatis berdasarkan halaman yang sedang dibuka (seperti Profil, Layanan, dan Kelembagaan).
 - **Editor Halaman Dinamis**: Kelola konten Profil, Visi-Misi, dan Sejarah langsung dari dasbor tanpa menyentuh kode.
 - **Agenda & Kalender**: Pantau jadwal kegiatan desa dan kalender pangan (pertanian) yang interaktif.
 
@@ -30,29 +30,22 @@ Aplikasi Sistem Informasi Desa modern yang dirancang untuk mempercepat pelayanan
 - **Visualisasi**: Recharts (Charts), Leaflet (Maps)
 - **Language**: TypeScript
 
-## 📦 Cara Instalasi
+## 📦 Cara Sinkronisasi GitHub
 
-1. **Clone Repositori**:
+Untuk mengunggah atau memperbarui kode di GitHub, gunakan perintah berikut di terminal Anda:
+
+1. **Inisialisasi & Hubungkan (Hanya satu kali)**:
    ```bash
-   git clone https://github.com/smilebaim/Desa-Lengkap.git
-   cd Desa-Lengkap
+   git init
+   git remote add origin https://github.com/smilebaim/Desa-Lengkap.git
    ```
 
-2. **Instal Dependensi**:
+2. **Kirim Perubahan**:
    ```bash
-   npm install
+   git add .
+   git commit -m "Update SID features and content structure"
+   git push -u origin main
    ```
-
-3. **Konfigurasi Firebase**:
-   Pastikan berkas `src/firebase/config.ts` sudah berisi konfigurasi proyek Firebase Anda.
-
-4. **Menjalankan Server**:
-   ```bash
-   npm run dev
-   ```
-
-5. **Inisialisasi Data**:
-   Masuk ke Dashboard Admin, gunakan fitur **"Pulihkan Data Bawaan"** pada menu Statistik dan **"Buat Menu Default"** untuk menyiapkan konten awal.
 
 ---
 *Dikembangkan untuk kemajuan digital Desa Remau Bako Tuo.*
