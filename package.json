@@ -1,7 +1,11 @@
 {
-  "name": "nextn",
-  "version": "0.1.0",
+  "name": "desa-lengkap",
+  "version": "1.0.0",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/smilebaim/Desa-Lengkap.git"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
