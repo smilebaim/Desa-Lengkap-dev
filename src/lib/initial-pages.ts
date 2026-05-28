@@ -117,7 +117,7 @@ export const initialPages: InitialPage[] = [
     title: "Layanan Persuratan",
     slug: "persuratan",
     content: `<h1>Layanan Administrasi Persuratan</h1>
-<p>Pemerintah Desa Remau Bako Tuo berkomitmen untuk memberikan pelayanan administrasi yang cepat, tepat, dan tanpa pungutan liar. Warga kini dapat mengajukan berbagai jenis surat melalui kantor desa dengan proses yang lebih efisien.</p>
+<p>Pemerintah Desa Remau Bako Tuo berkomitmen untuk memberikan pelayanan administrasi yang cepat, tepat, and tanpa pungutan liar. Warga kini dapat mengajukan berbagai jenis surat melalui kantor desa dengan proses yang lebih efisien.</p>
 <h2>Daftar Layanan Surat</h2>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin: 2rem 0;">
     <div style="padding: 1rem; border: 1px solid #e5e7eb; border-radius: 0.5rem; background-color: #f9fafb;">
