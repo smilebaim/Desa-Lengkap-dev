@@ -1,6 +1,6 @@
 # Sistem Informasi Desa (SID) - Desa Remau Bako Tuo
 
-Aplikasi Sistem Informasi Desa modern yang dirancang untuk mempercepat pelayanan publik, meningkatkan transparansi anggaran, dan mendigitalkan administrasi desa. Dibangun menggunakan teknologi web terkini untuk memberikan pengalaman terbaik bagi warga dan perangkat desa.
+Aplikasi Sistem Informasi Desa modern yang dirancang untuk mempercepat pelayanan publik, meningkatkan transparansi anggaran, dan mendigitalkan administrasi desa. Bangun menggunakan teknologi web terkini untuk memberikan pengalaman terbaik bagi warga dan perangkat desa.
 
 ## 🚀 Fitur Utama
 
