@@ -43,7 +43,7 @@ Untuk mengunggah atau memperbarui kode di GitHub, gunakan perintah berikut di te
 2. **Kirim Perubahan**:
    ```bash
    git add .
-   git commit -m "Update SID features and content structure"
+   git commit -m "Update SID features and structure"
    git push -u origin main
    ```
 
