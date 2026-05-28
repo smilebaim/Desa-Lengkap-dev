@@ -47,5 +47,22 @@ Untuk mengunggah atau memperbarui kode di GitHub, gunakan perintah berikut di te
    git push -u origin main
    ```
 
+## 🔐 Solusi Gagal Autentikasi (Authentication Failed)
+
+Jika Anda mendapatkan pesan error saat melakukan `git push`, coba langkah-langkah berikut:
+
+1. **Gunakan Personal Access Token (PAT)**:
+   GitHub tidak lagi menerima password akun untuk operasi Git. Anda harus membuat token di [GitHub Settings > Developer Settings > Personal Access Tokens](https://github.com/settings/tokens).
+   Saat diminta password di terminal, masukkan token tersebut.
+
+2. **Gunakan URL dengan Token**:
+   Anda bisa memasukkan token langsung ke URL remote (hati-hati: ini akan menyimpan token di riwayat command):
+   ```bash
+   git remote set-url origin https://USERNAME:TOKEN@github.com/smilebaim/Desa-Lengkap.git
+   ```
+
+3. **Cek Izin Repositori**:
+   Pastikan akun GitHub Anda memiliki akses tulis (write access) ke repositori `smilebaim/Desa-Lengkap`.
+
 ---
 *Dikembangkan untuk kemajuan digital Desa Remau Bako Tuo.*
