@@ -1,4 +1,3 @@
-'use server';
 import { db } from '@/firebase/config';
 import { 
     collection, 
@@ -268,7 +267,7 @@ export const seedDefaultMenus = async () => {
             description: 'Menu khusus untuk halaman profil.',
             location: 'sidebar',
             icon: 'Landmark',
-            items: initialPages.filter(p => ['profil-desa', 'sejarah-desa', 'visi-misi', 'struktur-pemerintahan', 'struktur-badan'].includes(p.slug)).map((p, index) => ({ title: p.title, path: `/${p.slug}`, icon: 'ChevronRight', order: index, parentId: null }))
+            items: initialPages.filter(p => ['profil/profil-desa', 'sejarah-desa', 'visi-misi', 'struktur-pemerintahan', 'struktur-badan'].includes(p.slug)).map((p, index) => ({ title: p.title, path: `/${p.slug}`, icon: 'ChevronRight', order: index, parentId: null }))
           },
           {
             name: 'Layanan Publik',

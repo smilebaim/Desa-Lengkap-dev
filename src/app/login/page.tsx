@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import { useAuth, useFirestore } from '@/firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
@@ -24,6 +25,7 @@ const LoginPage = () => {
   const auth = useAuth();
   const db = useFirestore();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { toast } = useToast();
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -41,11 +43,17 @@ const LoginPage = () => {
         photoURL: user.photoURL || ''
       }, { merge: true });
 
-       toast({
+      // Set auth cookie agar middleware bisa deteksi status auth (7 hari)
+      document.cookie = `auth-session=1; path=/; SameSite=Strict; max-age=${60 * 60 * 24 * 7}`;
+
+      toast({
         title: "Login Berhasil",
         description: "Selamat datang kembali!",
       });
-      router.push('/dashboard');
+
+      // Redirect ke halaman yang sebelumnya ingin diakses, atau ke dashboard
+      const redirectTo = searchParams.get('redirect') || '/dashboard';
+      router.push(redirectTo);
     } catch (error) {
        toast({
         title: "Login Gagal",

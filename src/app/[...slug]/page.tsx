@@ -12,6 +12,33 @@ import VisitorStatChart from "@/components/charts/VisitorStatChart";
 import PendapatanDesaChart from "@/components/charts/PendapatanDesaChart";
 import BelanjaDesaChart from "@/components/charts/BelanjaDesaChart";
 import React from "react";
+import type { Metadata } from "next";
+
+type Props = { params: Promise<{ slug: string[] }> };
+
+// Metadata dinamis berdasarkan konten halaman
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    const { slug: slugArray } = await params;
+    if (!slugArray || slugArray.length === 0) return {};
+
+    const slug = slugArray.join('/');
+    const page = await getCustomPageBySlug(slug);
+
+    if (!page) return { title: 'Halaman Tidak Ditemukan' };
+
+    const description = page.content.slice(0, 160).replace(/\n/g, ' ');
+
+    return {
+        title: page.title,
+        description,
+        openGraph: {
+            title: page.title,
+            description,
+        },
+    };
+}
+
+
 
 const CHART_PLACEHOLDERS = {
     '[STATISTIK_PENDUDUK_CHART]': <PopulationStatChart />,
@@ -28,7 +55,7 @@ const CHART_PLACEHOLDERS = {
 const allPlaceholders = Object.keys(CHART_PLACEHOLDERS).map(p => p.replace(/\[/g, '\\[').replace(/\]/g, '\\]')).join('|');
 const placeholderRegex = new RegExp(`(${allPlaceholders})`, 'g');
 
-export default async function CustomPage({ params }: { params: Promise<{ slug: string[] }> }) {
+export default async function CustomPage({ params }: Props) {
     const { slug: slugArray } = await params;
 
     if (!slugArray || slugArray.length === 0) {

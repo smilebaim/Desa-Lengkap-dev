@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 
 const profileLinks = [
-    { title: "Profil Desa", href: "/profil-desa", description: "Gambaran umum, geografis, dan demografi desa." },
+    { title: "Profil Desa", href: "/profil/profil-desa", description: "Gambaran umum, geografis, dan demografi desa." },
     { title: "Sejarah Desa", href: "/sejarah-desa", description: "Jejak langkah dan asal-usul berdirinya desa." },
     { title: "Visi & Misi", href: "/visi-misi", description: "Arah dan tujuan pembangunan desa ke depan." },
     { title: "Struktur Pemerintahan", href: "/struktur-pemerintahan", description: "Susunan perangkat desa yang bertugas." },

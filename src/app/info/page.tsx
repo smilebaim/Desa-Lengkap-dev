@@ -1,6 +1,6 @@
 
 import PublicLayout from "@/layouts/PublicLayout";
-import { getPublishedPosts } from "@/lib/posts-actions";
+import { getCachedPublishedPosts } from "@/lib/cached-actions";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -8,7 +8,7 @@ import { ArrowRight } from "lucide-react";
 import type { PostData } from "@/lib/posts-actions";
 
 export default async function InfoPage() {
-    const posts = await getPublishedPosts();
+    const posts = await getCachedPublishedPosts();
 
     return (
         <PublicLayout>

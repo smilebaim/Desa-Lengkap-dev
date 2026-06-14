@@ -7,7 +7,7 @@ export interface InitialPage {
 export const initialPages: InitialPage[] = [
   {
     title: "Profil Desa",
-    slug: "profil-desa",
+    slug: "profil/profil-desa",
     content: `<h1>Profil Umum Desa Remau Bako Tuo</h1>
 <p>Desa Remau Bako Tuo adalah sebuah desa yang terletak di Kecamatan Sadu, Kabupaten Tanjung Jabung Timur, Provinsi Jambi. Desa ini memiliki luas wilayah sekitar 150 km² dengan topografi yang didominasi oleh dataran rendah dan kawasan pesisir yang kaya akan sumber daya alam hayati.</p>
 <h2>Geografis dan Wilayah</h2>

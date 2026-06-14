@@ -1,10 +1,10 @@
 import LandingPage from "@/pages/landing/LandingPage";
 import PublicLayout from "@/layouts/PublicLayout";
-import { getSiteSettings } from "@/lib/site-settings-actions";
+import { getCachedSiteSettings } from "@/lib/cached-actions";
 import type { SiteSettings } from "@/lib/site-settings-actions";
 
 export default async function Home() {
-  const settings = await getSiteSettings();
+  const settings = await getCachedSiteSettings();
 
   return (
     <PublicLayout>

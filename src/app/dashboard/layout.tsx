@@ -78,6 +78,8 @@ const DashboardLayout = ({
       title: "Logout",
       description: "Anda akan dialihkan ke halaman utama.",
     });
+    // Hapus auth cookie agar middleware tahu user sudah logout
+    document.cookie = 'auth-session=; path=/; SameSite=Strict; max-age=0';
     await signOut(auth);
     router.push('/');
   };

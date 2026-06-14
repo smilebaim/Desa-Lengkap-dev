@@ -1,5 +1,4 @@
-'use server';
-import { db, storage } from '@/firebase/config';
+﻿import { db, storage } from '@/firebase/config';
 import { 
     collection, 
     addDoc, 

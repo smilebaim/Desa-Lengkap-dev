@@ -1,5 +1,4 @@
-'use server';
-import { db } from '@/firebase/config';
+﻿import { db } from '@/firebase/config';
 import { doc, getDoc, setDoc, serverTimestamp } from 'firebase/firestore';
 
 const settingsDocRef = doc(db, 'site_settings', 'main');
